@@ -1,6 +1,9 @@
 const path = require('path')
 const express = require('express')
 
+// middleware
+const { logger } = require('./middleware/logger')
+
 // routers
 const rootRouter = require('./routes/root')
 
@@ -9,6 +12,7 @@ const app = express()
 const port = process.env.PORT || 3500
 
 // middleware
+app.use(logger) // logs request to log file and console
 app.use(express.json()) // receive and parse json data
 
 // static folder
