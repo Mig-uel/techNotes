@@ -12,11 +12,12 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
 
-    roles: {
-      type: String,
-      enum: ['employee', 'admin'],
-      default: 'employee',
-    },
+    roles: [
+      {
+        type: String,
+        default: 'employee',
+      },
+    ],
 
     active: {
       type: Boolean,
