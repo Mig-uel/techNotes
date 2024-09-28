@@ -14,7 +14,7 @@ const port = process.env.PORT || 3500
 
 // middleware
 app.use(logger) // logs request to log file and console
-app.use(cors)
+app.use(cors) // custom cors
 app.use(express.json()) // receive and parse json data
 app.use(cookieParser()) // parses cookies for us
 
