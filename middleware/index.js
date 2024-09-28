@@ -1,5 +1,10 @@
+const { logEvents, logger } = require('./logger')
+const { errorHandler } = require('./errorHandler')
+const { cors } = require('./cors')
+
 module.exports = {
-  logger: require('./logger').logger,
-  errorHandler: require('./errorHandler').errorHandler,
-  cors: require('./cors').cors,
+  logger,
+  errorHandler,
+  cors,
+  logEvents,
 }
