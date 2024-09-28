@@ -13,9 +13,9 @@ const errorHandler = (err, req, res, next) => {
   console.log(err.stack)
 
   const status = res.statusCode || 500
+  const stack = process.env.NODE_ENV === 'development' ? err.stack : '🥞'
 
-  res.status(status)
-  return res.json({ error: err.message, status: status })
+  return res.status(status).json({ error: err.message, status, stack })
 }
 
 module.exports = { errorHandler }
