@@ -11,6 +11,7 @@ const port = process.env.PORT || 3500
 // static folder
 app.use(express.static(path.resolve(__dirname, 'public')))
 
+// routes
 app.use(rootRouter)
 
 app.listen(port, () => {
