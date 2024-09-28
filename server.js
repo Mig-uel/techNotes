@@ -8,6 +8,9 @@ const rootRouter = require('./routes/root')
 const app = express()
 const port = process.env.PORT || 3500
 
+// middleware
+app.use(express.json()) // receive and parse json data
+
 // static folder
 app.use(express.static(path.resolve(__dirname, 'public')))
 
