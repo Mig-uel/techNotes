@@ -7,8 +7,13 @@
   },
   "name": "technotes",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://github.com/Mig-uel/techNotes.git",
   "author": "Miguel <35431824+Mig-uel@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "Tech Notes",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  }
 }
