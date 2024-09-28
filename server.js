@@ -3,6 +3,7 @@ const express = require('express')
 
 // middleware
 const { logger, errorHandler } = require('./middleware')
+const cookieParser = require('cookie-parser')
 
 // routers
 const rootRouter = require('./routes/root')
@@ -14,6 +15,7 @@ const port = process.env.PORT || 3500
 // middleware
 app.use(logger) // logs request to log file and console
 app.use(express.json()) // receive and parse json data
+app.use(cookieParser()) // parses cookies for us
 
 // static folder
 app.use(express.static(path.resolve(__dirname, 'public')))
