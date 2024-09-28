@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 
 // middleware
-const { logger } = require('./middleware/logger')
+const { logger, errorHandler } = require('./middleware')
 
 // routers
 const rootRouter = require('./routes/root')
@@ -38,6 +38,9 @@ app.all('*', (req, res) => {
     res.type('txt').send('404 Not Found')
   }
 })
+
+// custom error handler
+app.use(errorHandler)
 
 app.listen(port, () => {
   console.log(`SERVER RUNNING ON PORT: ${port}`)
