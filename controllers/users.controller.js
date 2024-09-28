@@ -12,7 +12,7 @@ const { errorResponse } = require('../utils/errorResponse')
 const getAllUser = asyncHandler(async (req, res) => {
   const users = await User.find().select('-password').lean()
 
-  if (!users) {
+  if (!users?.length) {
     const error = new Error('No users found!')
     error.status = 404
 
@@ -121,7 +121,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const updatedUser = await user.save()
 
   return res.status(200).json({
-    message: `${updateUser.username} updated`,
+    message: `${updatedUser.username} updated`,
   })
 })
 
