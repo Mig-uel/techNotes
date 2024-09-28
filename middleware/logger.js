@@ -24,3 +24,21 @@ const logEvents = async (message, logFileName) => {
     console.log(error)
   }
 }
+
+// logger middleware
+const logger = (req, res, next) => {
+  const { method, url, headers } = req
+
+  // logs request method, request url, and request origin to the 'requests.log'
+  logEvents(`${method}\t${url}\t${headers.origin}`, 'requests.log')
+
+  // logs to the console the request method, and request path
+  console.log(`${method} - ${req.path}`)
+
+  return next()
+}
+
+module.exports = {
+  logEvents,
+  logger,
+}
