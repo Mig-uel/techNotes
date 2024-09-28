@@ -11,7 +11,7 @@ const logEvents = async (message, logFileName) => {
 
   try {
     // check if 'logs' directory exists, if not make one
-    if (!fs.existsSync(path.resolve(__dirname, '.', 'logs'))) {
+    if (!fs.existsSync(path.resolve(__dirname, '..', 'logs'))) {
       await fsPromises.mkdir(path.join(__dirname, '..', 'logs'))
     }
 
