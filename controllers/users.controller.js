@@ -2,6 +2,7 @@ const User = require('../models/user.model')
 const Note = require('../models/note.model')
 const bcrypt = require('bcrypt')
 const { asyncHandler } = require('../utils/asyncHandler')
+const { errorResponse } = require('../utils/errorResponse')
 
 /**
  * @desc Get all users
@@ -79,7 +80,50 @@ const createNewUser = asyncHandler(async (req, res) => {
  * @route PATCH /users
  * @access Private
  */
-const updateUser = asyncHandler(async (req, res) => {})
+const updateUser = asyncHandler(async (req, res) => {
+  const { id, username, roles, active, password } = req.body
+
+  // confirm data
+  if (
+    !id ||
+    !username ||
+    !Array.isArray(roles) ||
+    !roles.length ||
+    typeof active !== 'boolean'
+  ) {
+    errorResponse('All fields are required', 400)
+  }
+
+  const user = await User.findById(id)
+
+  if (!user) {
+    errorResponse('User not found', 404)
+  }
+
+  // check for duplicates
+  const isDuplicate = await User.findOne({ username }).lean()
+
+  // allow updates to the original user
+  if (isDuplicate && isDuplicate._id.toString() !== id) {
+    errorResponse('Username already exists', 409)
+  }
+
+  user.username = username
+  user.roles = roles
+  user.active = active
+
+  if (password) {
+    const salt = 10
+    // hash password
+    user.password = await bcrypt.hash(password, salt)
+  }
+
+  const updatedUser = await user.save()
+
+  return res.status(200).json({
+    message: `${updateUser.username} updated`,
+  })
+})
 
 /**
  * @desc Delete a user
