@@ -13,3 +13,4 @@ A full-stack application that allows users to create, read, update, and delete n
 ## Credits
 
 - [Dave Gray](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6P4dQUsoDatjEGpmBpcOW8V) - MERN Stack Tutorial
+- [Project Repo](https://github.com/gitdagray/mern_stack_course)
