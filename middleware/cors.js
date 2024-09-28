@@ -1,11 +1,30 @@
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://www.dandrepairshop.com',
+  'https://dandrepairshop.com',
+  'https://www.google.com',
+]
+
 const cors = (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
+  const origin = req.headers.origin
+
+  if (allowedOrigins.includes(origin) || !origin) {
+    res.setHeader('Allow-Control-Allow-Origin', `${origin || true}`)
+  } else {
+    console.log('Origin not allowed:', origin)
+  }
+
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
+  )
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
-  if (req.method === 'OPTIONS') return res.sendStatus(200)
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200)
+  }
 
-  return next()
+  next()
 }
 
 module.exports = { cors }
