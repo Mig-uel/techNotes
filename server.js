@@ -1,9 +1,11 @@
 require('dotenv').config()
 const path = require('path')
 const express = require('express')
+const mongoose = require('mongoose')
+const { connectDB } = require('./config/db')
 
 // middleware
-const { logger, errorHandler, cors } = require('./middleware')
+const { logger, errorHandler, cors, logEvents } = require('./middleware')
 const cookieParser = require('cookie-parser')
 
 // routers
@@ -12,6 +14,9 @@ const rootRouter = require('./routes/root')
 // init express instance
 const app = express()
 const port = process.env.PORT || 3500
+
+// init db connection
+connectDB()
 
 // middleware
 app.use(logger) // logs request to log file and console
@@ -46,6 +51,21 @@ app.all('*', (req, res) => {
 // custom error handler
 app.use(errorHandler)
 
-app.listen(port, () => {
-  console.log(`SERVER RUNNING ON PORT: ${port}`)
+// mongoose event listener
+mongoose.connection.once('open', () => {
+  console.log(`CONNECTED TO MONGODB: ${mongoose.connection.name}`)
+
+  app.listen(port, () => {
+    console.log(`SERVER RUNNING ON PORT: ${port}`)
+  })
+})
+
+// mongoose event listener
+mongoose.connection.on('error', (error) => {
+  console.log(error)
+
+  logEvents(
+    `${error.no}: ${error.code}\t${error.syscall}\t${error.hostname}`,
+    'mongo_errors.log'
+  )
 })
