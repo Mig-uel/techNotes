@@ -21,7 +21,7 @@ const NoteSchema = new mongoose.Schema(
 
     completed: {
       required: true,
-      type: boolean,
+      type: Boolean,
       default: false,
     },
   },
