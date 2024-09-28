@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser')
 
 // routers
 const rootRouter = require('./routes/root')
+const userRouter = require('./routes/user.routes')
 
 // init express instance
 const app = express()
@@ -29,6 +30,7 @@ app.use(express.static(path.resolve(__dirname, 'public')))
 
 // routes
 app.use(rootRouter)
+app.use('/users', userRouter)
 
 // 404
 app.all('*', (req, res) => {
