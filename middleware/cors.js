@@ -9,7 +9,7 @@ const cors = (req, res, next) => {
   const origin = req.headers.origin
 
   if (allowedOrigins.includes(origin) || !origin) {
-    res.setHeader('Allow-Control-Allow-Origin', `${origin || true}`)
+    res.setHeader('Access-Control-Allow-Origin', origin || true)
   } else {
     console.log('Origin not allowed:', origin)
   }
