@@ -12,7 +12,7 @@ const errorHandler = (err, req, res, next) => {
   // log to the console the error stack
   console.log(err.stack)
 
-  const status = res.statusCode || 500
+  const status = err.status || 500
   const stack = process.env.NODE_ENV === 'development' ? err.stack : '🥞'
 
   return res.status(status).json({ error: err.message, status, stack })
