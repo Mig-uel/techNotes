@@ -137,11 +137,11 @@ const deleteUser = asyncHandler(async (req, res) => {
     errorResponse('User ID Required', 400)
   }
 
-  const notes = await Note.findOne({
+  const note = await Note.findOne({
     user: id,
   })
 
-  if (notes?.length) {
+  if (note) {
     errorResponse('User has assigned notes', 400)
   }
 
