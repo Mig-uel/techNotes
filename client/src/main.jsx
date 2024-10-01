@@ -9,6 +9,8 @@ import Welcome from './pages/welcome.jsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
+import NotesList from './pages/notes/notes-list.component.jsx'
+import UsersList from './pages/users/users-list.component.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,13 +26,31 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/dashboard',
+        path: 'dashboard',
         element: <DashboardLayout />,
 
         children: [
           {
             index: true,
             element: <Welcome />,
+          },
+          {
+            path: 'notes',
+            children: [
+              {
+                index: true,
+                element: <NotesList />,
+              },
+            ],
+          },
+          {
+            path: 'users',
+            children: [
+              {
+                index: true,
+                element: <UsersList />,
+              },
+            ],
           },
         ],
       },
