@@ -4,10 +4,11 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import Public from './pages/public.jsx'
 import DashboardLayout from './components/dashboard/dashboard-layout.jsx'
+import Login from './pages/login.jsx'
+import Welcome from './pages/welcome.jsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import Login from './pages/login.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,10 +25,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
+        element: <DashboardLayout />,
+
         children: [
           {
             index: true,
-            element: <DashboardLayout />,
+            element: <Welcome />,
           },
         ],
       },
