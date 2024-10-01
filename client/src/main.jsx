@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 
 import App from './App.jsx'
 import Public from './pages/public.jsx'
+import DashboardLayout from './components/dashboard/dashboard-layout.jsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
@@ -20,6 +21,15 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+      },
+      {
+        path: '/dashboard',
+        children: [
+          {
+            index: true,
+            element: <DashboardLayout />,
+          },
+        ],
       },
     ],
   },
